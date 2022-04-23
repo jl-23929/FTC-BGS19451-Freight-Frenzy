@@ -29,11 +29,14 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+
 
 
 @TeleOp(name="teamBlueDriver", group="Linear OpMode")
@@ -63,7 +66,8 @@ public class teamBlueDriver extends LinearOpMode {
         backRightDrive = hardwareMap.get(DcMotor.class, "backRightDrive");
         Arm = hardwareMap.get(DcMotor.class, "Arm");
         Intake = hardwareMap.get(DcMotor.class, "Intake");
-
+        frontLeftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+        backLeftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         runtime.reset();
@@ -72,17 +76,17 @@ public class teamBlueDriver extends LinearOpMode {
         while (opModeIsActive()) {
 
             if (gamepad1.a) {
-                duckSpinner.setPower(1);
+                duckSpinner.setPower(255);
             } else {
                 duckSpinner.setPower(0);
             }
             if (gamepad1.left_bumper) {
-                Intake.setPower(1);
+                Intake.setPower(255);
             } else {
                 Intake.setPower(0);
             }
             if (gamepad1.right_bumper) {
-                Intake.setPower(-1);
+                Intake.setPower(-255);
             } else {
                 Intake.setPower(0);
             }

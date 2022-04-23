@@ -105,7 +105,7 @@ public class blueAutonomous extends LinearOpMode {
         backRightDrive.setPower(0);
         backLeftDrive.setPower(0);
 
-        int frontRightTarget2 = frontRightDrive.getCurrentPosition() + (int) (-10m * driveCounts);
+        int frontRightTarget2 = frontRightDrive.getCurrentPosition() + (int) (-10 * driveCounts);
         int frontLeftTarget2 = frontLeftDrive.getCurrentPosition() + (int) (-10 * driveCounts);
         int backRightTarget2 = backRightDrive.getCurrentPosition() + (int) (-10 * driveCounts);
         int backLeftTarget2 = backLeftDrive.getCurrentPosition() + (int) (-10 * driveCounts);
