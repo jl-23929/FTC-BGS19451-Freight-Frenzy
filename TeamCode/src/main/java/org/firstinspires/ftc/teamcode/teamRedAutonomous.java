@@ -65,7 +65,7 @@ public class teamRedAutonomous extends LinearOpMode {
         frontRightDrive.setDirection(DcMotorSimple.Direction.REVERSE); //Reverses the normal direction of the front right motor.
         backRightDrive.setDirection(DcMotorSimple.Direction.REVERSE); //Reverses the normal direction of the back right motor.
 
-        backLeftDrive = hardwareMap.get(DcMotor.class, "backLeftDrive");
+        backLeftDrive = hardwareMap.get(DcMotor.class, "backLeftDrive"); //Maps backLeftDrive to the motor registered on the FTC Driver Control App with the same name.
         backRightDrive = hardwareMap.get(DcMotor.class, "backRightDrive");
         distanceSensor = hardwareMap.get(DistanceSensor.class, "distanceSensor");
 
