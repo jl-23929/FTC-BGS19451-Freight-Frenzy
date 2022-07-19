@@ -45,7 +45,7 @@ public class blueAutonomous extends LinearOpMode {
     private DcMotor frontRightDrive = null;
     private DcMotor backLeftDrive = null;
     private DcMotor backRightDrive = null;
-    private DistanceSensor distanceSensor = null;
+   // private DistanceSensor distanceSensor = null;
     double speed = 1.0;
     private DcMotor duckSpinner;
 
@@ -61,7 +61,7 @@ public class blueAutonomous extends LinearOpMode {
         frontRightDrive = hardwareMap.get(DcMotor.class, "frontRightDrive");
         backLeftDrive = hardwareMap.get(DcMotor.class, "backLeftDrive");
         backRightDrive = hardwareMap.get(DcMotor.class, "backRightDrive");
-        distanceSensor = hardwareMap.get(DistanceSensor.class, "distanceSensor");
+      //  distanceSensor = hardwareMap.get(DistanceSensor.class, "distanceSensor");
         duckSpinner = hardwareMap.get(DcMotor.class, "duckSpinner");
         int power = 1;
         frontRightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -127,12 +127,34 @@ public class blueAutonomous extends LinearOpMode {
 
         while (opModeIsActive() && (frontRightDrive.isBusy() || frontLeftDrive.isBusy() || backLeftDrive.isBusy() || backRightDrive.isBusy())) {
         }
+        int frontRightTarget6 = frontRightDrive.getCurrentPosition() + (int) (4 * driveCounts);
+        int frontLeftTarget6 = frontLeftDrive.getCurrentPosition() + (int) (-4 * driveCounts);
+        int backRightTarget6 = backRightDrive.getCurrentPosition() + (int) (-4 * driveCounts);
+        int backLeftTarget6 = backLeftDrive.getCurrentPosition() + (int) (4 * driveCounts);
+
+        frontRightDrive.setTargetPosition(frontRightTarget2);
+        frontLeftDrive.setTargetPosition(frontLeftTarget2);
+        backRightDrive.setTargetPosition(backRightTarget2);
+        backLeftDrive.setTargetPosition(backLeftTarget2);
+
+        frontRightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontLeftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        frontRightDrive.setPower(0.75);
+        frontLeftDrive.setPower(0.75);
+        backRightDrive.setPower(0.75);
+        backLeftDrive.setPower(0.75);
+
+        while (opModeIsActive() && (frontRightDrive.isBusy() || frontLeftDrive.isBusy() || backLeftDrive.isBusy() || backRightDrive.isBusy())) {
+        }
 
         frontRightDrive.setPower(0);
         frontLeftDrive.setPower(0);
         backRightDrive.setPower(0);
         backLeftDrive.setPower(0);
-        duckSpinner.setPower(-1 * power);
+        duckSpinner.setPower(1 * power);
         sleep(3000);           // Show the elapsed game time and wheel power.
         duckSpinner.setPower(0);
         int frontRightTarget3 = frontRightDrive.getCurrentPosition() + (int) (40 * driveCounts);

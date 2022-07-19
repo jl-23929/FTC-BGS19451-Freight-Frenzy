@@ -32,12 +32,11 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="Autonomous_v2", group="Linear OpMode")
-public class Autonomous_v2 extends LinearOpMode {
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="blueAutonomousShort", group="Linear OpMode")
+public class blueAutonomousShortFinalApproach extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -45,7 +44,7 @@ public class Autonomous_v2 extends LinearOpMode {
     private DcMotor frontRightDrive = null;
     private DcMotor backLeftDrive = null;
     private DcMotor backRightDrive = null;
-  //  private DistanceSensor distanceSensor = null;
+   // private DistanceSensor distanceSensor = null;
     double speed = 1.0;
     private DcMotor duckSpinner;
 
@@ -61,10 +60,12 @@ public class Autonomous_v2 extends LinearOpMode {
         frontRightDrive = hardwareMap.get(DcMotor.class, "frontRightDrive");
         backLeftDrive = hardwareMap.get(DcMotor.class, "backLeftDrive");
         backRightDrive = hardwareMap.get(DcMotor.class, "backRightDrive");
-     //   distanceSensor = hardwareMap.get(DistanceSensor.class, "distanceSensor");
+      //  distanceSensor = hardwareMap.get(DistanceSensor.class, "distanceSensor");
         duckSpinner = hardwareMap.get(DcMotor.class, "duckSpinner");
         int power = 1;
         frontRightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+        //    duckSpinner = hardwareMap.get(DcMotor.class, "duckSpinner");
+
         backRightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         waitForStart();
         runtime.reset();
@@ -72,10 +73,10 @@ public class Autonomous_v2 extends LinearOpMode {
         double countsPerRev = 288;
         double wheelCircumferenceMM = 75 * Math.PI;
         double driveCounts = (countsPerRev * gearReduction / wheelCircumferenceMM);
-        int frontRightTarget = frontRightDrive.getCurrentPosition() + (int) (4 * driveCounts);
-        int frontLeftTarget = frontLeftDrive.getCurrentPosition() + (int) (4 * driveCounts);
-        int backRightTarget = backRightDrive.getCurrentPosition() + (int) (4 * driveCounts);
-        int backLeftTarget = backLeftDrive.getCurrentPosition() + (int) (4 * driveCounts);
+        int frontRightTarget = frontRightDrive.getCurrentPosition() + (int) (-9 * driveCounts);
+        int frontLeftTarget = frontLeftDrive.getCurrentPosition() + (int) (9 * driveCounts);
+        int backRightTarget = backRightDrive.getCurrentPosition() + (int) (9 * driveCounts);
+        int backLeftTarget = backLeftDrive.getCurrentPosition() + (int) (-9 * driveCounts);
 
         frontRightDrive.setTargetPosition(frontRightTarget);
         frontLeftDrive.setTargetPosition(frontLeftTarget);
@@ -103,10 +104,10 @@ public class Autonomous_v2 extends LinearOpMode {
         backRightDrive.setPower(0);
         backLeftDrive.setPower(0);
 
-        int frontRightTarget2 = frontRightDrive.getCurrentPosition() + (int) (4 * driveCounts);
-        int frontLeftTarget2 = frontLeftDrive.getCurrentPosition() + (int) (-4 * driveCounts);
-        int backRightTarget2 = backRightDrive.getCurrentPosition() + (int) (-4 * driveCounts);
-        int backLeftTarget2 = backLeftDrive.getCurrentPosition() + (int) (4 * driveCounts);
+        int frontRightTarget2 = frontRightDrive.getCurrentPosition() + (int) (-10 * driveCounts);
+        int frontLeftTarget2 = frontLeftDrive.getCurrentPosition() + (int) (-10 * driveCounts);
+        int backRightTarget2 = backRightDrive.getCurrentPosition() + (int) (-10 * driveCounts);
+        int backLeftTarget2 = backLeftDrive.getCurrentPosition() + (int) (-10 * driveCounts);
 
         frontRightDrive.setTargetPosition(frontRightTarget2);
         frontLeftDrive.setTargetPosition(frontLeftTarget2);
@@ -118,10 +119,10 @@ public class Autonomous_v2 extends LinearOpMode {
         frontLeftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backLeftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        frontRightDrive.setPower(power);
-        frontLeftDrive.setPower(power);
-        backRightDrive.setPower(power);
-        backLeftDrive.setPower(power);
+        frontRightDrive.setPower(0.75);
+        frontLeftDrive.setPower(0.75);
+        backRightDrive.setPower(0.75);
+        backLeftDrive.setPower(0.75);
 
         while (opModeIsActive() && (frontRightDrive.isBusy() || frontLeftDrive.isBusy() || backLeftDrive.isBusy() || backRightDrive.isBusy())) {
         }
@@ -130,13 +131,13 @@ public class Autonomous_v2 extends LinearOpMode {
         frontLeftDrive.setPower(0);
         backRightDrive.setPower(0);
         backLeftDrive.setPower(0);
-        duckSpinner.setPower(-1 * power);
+        duckSpinner.setPower(1 * power);
         sleep(3000);           // Show the elapsed game time and wheel power.
         duckSpinner.setPower(0);
-        int frontRightTarget3 = frontRightDrive.getCurrentPosition() + (int) (20 * driveCounts);
-        int frontLeftTarget3 = frontLeftDrive.getCurrentPosition() + (int) (-20 * driveCounts);
-        int backRightTarget3 = backRightDrive.getCurrentPosition() + (int) (20 * driveCounts);
-        int backLeftTarget3 = backLeftDrive.getCurrentPosition() + (int) (-20 * driveCounts);
+        int frontRightTarget3 = frontRightDrive.getCurrentPosition() + (int) (40 * driveCounts);
+        int frontLeftTarget3 = frontLeftDrive.getCurrentPosition() + (int) (40 * driveCounts);
+        int backRightTarget3 = backRightDrive.getCurrentPosition() + (int) (40 * driveCounts);
+        int backLeftTarget3 = backLeftDrive.getCurrentPosition() + (int) (40 * driveCounts);
 
         frontRightDrive.setTargetPosition(frontRightTarget3);
         frontLeftDrive.setTargetPosition(frontLeftTarget3);
@@ -156,10 +157,10 @@ public class Autonomous_v2 extends LinearOpMode {
         while (opModeIsActive() && (frontRightDrive.isBusy() || frontLeftDrive.isBusy() || backLeftDrive.isBusy() || backRightDrive.isBusy())) {
         }
 sleep(1000);
-        int frontRightTarget4 = frontRightDrive.getCurrentPosition() + (int) (-85 * driveCounts);
-        int frontLeftTarget4 = frontLeftDrive.getCurrentPosition() + (int) (-85 * driveCounts);
-        int backRightTarget4 = backRightDrive.getCurrentPosition() + (int) (-85 * driveCounts);
-        int backLeftTarget4 = backLeftDrive.getCurrentPosition() + (int) (-85 * driveCounts);
+        int frontRightTarget4 = frontRightDrive.getCurrentPosition() + (int) (9 * driveCounts);
+        int frontLeftTarget4 = frontLeftDrive.getCurrentPosition() + (int) (-9 * driveCounts);
+        int backRightTarget4 = backRightDrive.getCurrentPosition() + (int) (-9 * driveCounts);
+        int backLeftTarget4 = backLeftDrive.getCurrentPosition() + (int) (9 * driveCounts);
 
         frontRightDrive.setTargetPosition(frontRightTarget4);
         frontLeftDrive.setTargetPosition(frontLeftTarget4);
@@ -179,37 +180,15 @@ sleep(1000);
         while (opModeIsActive() && (frontRightDrive.isBusy() || frontLeftDrive.isBusy() || backLeftDrive.isBusy() || backRightDrive.isBusy())) {
         }
 
-        int frontRightTarget5 = frontRightDrive.getCurrentPosition() + (int) (30 * driveCounts);
-        int frontLeftTarget5 = frontLeftDrive.getCurrentPosition() + (int) (-30 * driveCounts);
-        int backRightTarget5 = backRightDrive.getCurrentPosition() + (int) (-30 * driveCounts);
-        int backLeftTarget5 = backLeftDrive.getCurrentPosition() + (int) (30 * driveCounts);
+        int frontRightTarget5 = frontRightDrive.getCurrentPosition() + (int) (50 * driveCounts);
+        int frontLeftTarget5 = frontLeftDrive.getCurrentPosition() + (int) (50 * driveCounts);
+        int backRightTarget5 = backRightDrive.getCurrentPosition() + (int) (50 * driveCounts);
+        int backLeftTarget5 = backLeftDrive.getCurrentPosition() + (int) (50 * driveCounts);
 
         frontRightDrive.setTargetPosition(frontRightTarget5);
         frontLeftDrive.setTargetPosition(frontLeftTarget5);
         backRightDrive.setTargetPosition(backRightTarget5);
         backLeftDrive.setTargetPosition(backLeftTarget5);
-
-        frontRightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backRightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontLeftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backLeftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        frontRightDrive.setPower(power);
-        frontLeftDrive.setPower(power);
-        backRightDrive.setPower(power);
-        backLeftDrive.setPower(power);
-
-        while (opModeIsActive() && (frontRightDrive.isBusy() || frontLeftDrive.isBusy() || backLeftDrive.isBusy() || backRightDrive.isBusy())) {
-        }
-        int frontRightTarget6 = frontRightDrive.getCurrentPosition() + (int) (-50 * driveCounts);
-        int frontLeftTarget6 = frontLeftDrive.getCurrentPosition() + (int) (-50 * driveCounts);
-        int backRightTarget6 = backRightDrive.getCurrentPosition() + (int) (-50 * driveCounts);
-        int backLeftTarget6 = backLeftDrive.getCurrentPosition() + (int) (-50 * driveCounts);
-
-        frontRightDrive.setTargetPosition(frontRightTarget6);
-        frontLeftDrive.setTargetPosition(frontLeftTarget6);
-        backRightDrive.setTargetPosition(backRightTarget6);
-        backLeftDrive.setTargetPosition(backLeftTarget6);
 
         frontRightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backRightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);

@@ -26,7 +26,7 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
+/*
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
@@ -75,7 +75,7 @@ public class teamRedAutonomous extends LinearOpMode {
 
         while (opModeIsActive()) {
             // Put run blocks here.
-
+        }
 
 
             if (distanceSensor.getDistance(DistanceUnit.CM) > 60 ) {
@@ -98,3 +98,4 @@ public class teamRedAutonomous extends LinearOpMode {
             telemetry.update();
         }
     }
+    */

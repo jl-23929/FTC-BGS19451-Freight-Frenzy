@@ -29,13 +29,15 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-
+@Disabled
 @TeleOp(name="teamRedDriver_badNames", group="Linear OpMode")
 public class teamRedDriver_badNames extends LinearOpMode {
 
@@ -48,39 +50,39 @@ public class teamRedDriver_badNames extends LinearOpMode {
     private DcMotor backRightDrive = null;
     private DcMotor Arm = null;
     private DcMotor Intake = null;
+    private Servo servoTest;
 
-    @Override
-    public void runOpMode() {
+    @Override    public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        duckSpinner = hardwareMap.get(DcMotor.class, "duckSpinner");
+        duckSpinner = hardwareMap.get(DcMotor.class, "spin");
         frontLeftDrive = hardwareMap.get(DcMotor.class, "left_front");
         frontRightDrive = hardwareMap.get(DcMotor.class, "right_front");
-        backLeftDrive = hardwareMap.get(DcMotor.class, "left_back.");
+        backLeftDrive = hardwareMap.get(DcMotor.class, "left_back");
         backRightDrive = hardwareMap.get(DcMotor.class, "right_back");
         Arm = hardwareMap.get(DcMotor.class, "joint");
         Intake = hardwareMap.get(DcMotor.class, "spin");
         frontLeftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+        servoTest = hardwareMap.get(Servo.class, "clamp");
+
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         runtime.reset();
         // run until the end of the match (driver presses STOP)
 
         while (opModeIsActive()) {
-
+            frontRightDrive.setPower(gamepad1.left_stick_x + (gamepad1.right_stick_y + gamepad1.right_stick_x));
+            backRightDrive.setPower(gamepad1.left_stick_x + (gamepad1.right_stick_y - gamepad1.right_stick_x));
+            frontLeftDrive.setPower(-gamepad1.left_stick_x + (gamepad1.right_stick_y - gamepad1.right_stick_x));
+            backLeftDrive.setPower(-gamepad1.left_stick_x + (gamepad1.right_stick_y + gamepad1.right_stick_x));
             if (gamepad1.a) {
-                duckSpinner.setPower(-1);
+                duckSpinner.setPower(1);
             } else {
                 duckSpinner.setPower(0);
-            }
-            if (gamepad1.left_bumper) {
-                Intake.setPower(1);
-            } else {
-                Intake.setPower(0);
             }
             if (gamepad1.right_bumper) {
                 Intake.setPower(-1);
@@ -97,17 +99,17 @@ public class teamRedDriver_badNames extends LinearOpMode {
             } else {
                 Arm.setPower(0);
             }
-            float x1 = gamepad1.right_stick_x;
-            float x2 = gamepad1.left_stick_x;
-            float y = gamepad1.left_stick_y;
+    if (gamepad1.x) {
+        servoTest.setPosition(1.0);
+    } else {
+        servoTest.setPosition(0.0);
+    }
+            }
 
-            frontRightDrive.setPower(x1 + (y + x2));
-            backRightDrive.setPower(x1 + (y - x2));
-            frontLeftDrive.setPower(-x1 + (y - x2));
-            backLeftDrive.setPower(-x1 + (y + x2));
+            // Put run blocks here.
+
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.update();
         }
     }
-}

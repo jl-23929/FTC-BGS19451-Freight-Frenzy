@@ -32,12 +32,11 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="Autonomous_v2", group="Linear OpMode")
-public class Autonomous_v2 extends LinearOpMode {
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="Red AutonomousShortFinalApproach", group="Linear OpMode")
+public class AutonomousLessFarFinalApproach_v2 extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -201,10 +200,10 @@ sleep(1000);
 
         while (opModeIsActive() && (frontRightDrive.isBusy() || frontLeftDrive.isBusy() || backLeftDrive.isBusy() || backRightDrive.isBusy())) {
         }
-        int frontRightTarget6 = frontRightDrive.getCurrentPosition() + (int) (-50 * driveCounts);
-        int frontLeftTarget6 = frontLeftDrive.getCurrentPosition() + (int) (-50 * driveCounts);
-        int backRightTarget6 = backRightDrive.getCurrentPosition() + (int) (-50 * driveCounts);
-        int backLeftTarget6 = backLeftDrive.getCurrentPosition() + (int) (-50 * driveCounts);
+        int frontRightTarget6 = frontRightDrive.getCurrentPosition() + (int) (-25 * driveCounts);
+        int frontLeftTarget6 = frontLeftDrive.getCurrentPosition() + (int) (-25 * driveCounts);
+        int backRightTarget6 = backRightDrive.getCurrentPosition() + (int) (-25 * driveCounts);
+        int backLeftTarget6 = backLeftDrive.getCurrentPosition() + (int) (-25 * driveCounts);
 
         frontRightDrive.setTargetPosition(frontRightTarget6);
         frontLeftDrive.setTargetPosition(frontLeftTarget6);

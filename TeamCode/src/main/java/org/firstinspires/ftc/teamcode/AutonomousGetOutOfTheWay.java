@@ -29,17 +29,14 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="Autonomous", group="Linear OpMode")
-public class Autonomous extends LinearOpMode {
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="AutonomousGetOutOfTheWay", group="Linear OpMode")
+public class AutonomousGetOutOfTheWay extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -47,8 +44,10 @@ public class Autonomous extends LinearOpMode {
     private DcMotor frontRightDrive = null;
     private DcMotor backLeftDrive = null;
     private DcMotor backRightDrive = null;
-    private DistanceSensor distanceSensor = null;
-    double speed = 0.5;
+  //  private DistanceSensor distanceSensor = null;
+    double speed = 1.0;
+    private DcMotor duckSpinner;
+
 
     @Override
     public void runOpMode() {
@@ -61,35 +60,49 @@ public class Autonomous extends LinearOpMode {
         frontRightDrive = hardwareMap.get(DcMotor.class, "frontRightDrive");
         backLeftDrive = hardwareMap.get(DcMotor.class, "backLeftDrive");
         backRightDrive = hardwareMap.get(DcMotor.class, "backRightDrive");
-        distanceSensor = hardwareMap.get(DistanceSensor.class, "frontDistanceSensor");
+     //   distanceSensor = hardwareMap.get(DistanceSensor.class, "distanceSensor");
+        duckSpinner = hardwareMap.get(DcMotor.class, "duckSpinner");
+        int power = 1;
         frontRightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         backRightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         waitForStart();
         runtime.reset();
-        // run until the end of the match (driver presses STOP)
+        double gearReduction = 20.15293;
+        double countsPerRev = 288;
+        double wheelCircumferenceMM = 75 * Math.PI;
+        double driveCounts = (countsPerRev * gearReduction / wheelCircumferenceMM);
+        int frontRightTarget = frontRightDrive.getCurrentPosition() + (int) (30 * driveCounts);
+        int frontLeftTarget = frontLeftDrive.getCurrentPosition() + (int) (30 * driveCounts);
+        int backRightTarget = backRightDrive.getCurrentPosition() + (int) (30 * driveCounts);
+        int backLeftTarget = backLeftDrive.getCurrentPosition() + (int) (30 * driveCounts);
 
-        while (opModeIsActive()) {
-            // Put run blocks here.
+        frontRightDrive.setTargetPosition(frontRightTarget);
+        frontLeftDrive.setTargetPosition(frontLeftTarget);
+        backRightDrive.setTargetPosition(backRightTarget);
+        backLeftDrive.setTargetPosition(backLeftTarget);
 
+        frontRightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontLeftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
+        frontRightDrive.setPower(power);
+        frontLeftDrive.setPower(power);
+        backRightDrive.setPower(power);
+        backLeftDrive.setPower(power);
 
-            if (distanceSensor.getDistance(DistanceUnit.CM) > 50 ) {
-                frontRightDrive.setPower(speed);
-                frontLeftDrive.setPower(speed);
-                backLeftDrive.setPower(speed);
-                backRightDrive.setPower(speed);
-            } else {
-                frontRightDrive.setPower(0);
-                frontLeftDrive.setPower(0);
-                backLeftDrive.setPower(0);
-                backRightDrive.setPower(0);
-            }
-
-}
-            // Show the elapsed game time and wheel power.
-            telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("range", distanceSensor.getDistance(DistanceUnit.CM));
-            telemetry.update();
+        while (opModeIsActive() && (frontRightDrive.isBusy() || frontLeftDrive.isBusy() || backLeftDrive.isBusy() || backRightDrive.isBusy())) {
         }
+        frontRightDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRightDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontLeftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRightDrive.setPower(0);
+        frontLeftDrive.setPower(0);
+        backRightDrive.setPower(0);
+        backLeftDrive.setPower(0);
+        telemetry.addData("Status", "Run Time: " + runtime.toString()); //Displays elapsed time on phone.
+        telemetry.update();
+
     }
+}
