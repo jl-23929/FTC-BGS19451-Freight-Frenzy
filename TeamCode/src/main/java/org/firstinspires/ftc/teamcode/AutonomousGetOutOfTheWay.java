@@ -46,7 +46,7 @@ public class AutonomousGetOutOfTheWay extends LinearOpMode {
     private DcMotor backRightDrive = null;
   //  private DistanceSensor distanceSensor = null;
     double speed = 1.0;
-    private DcMotor duckSpinner;
+  //  private DcMotor duckSpinner;
 
 
     @Override
@@ -61,7 +61,7 @@ public class AutonomousGetOutOfTheWay extends LinearOpMode {
         backLeftDrive = hardwareMap.get(DcMotor.class, "backLeftDrive");
         backRightDrive = hardwareMap.get(DcMotor.class, "backRightDrive");
      //   distanceSensor = hardwareMap.get(DistanceSensor.class, "distanceSensor");
-        duckSpinner = hardwareMap.get(DcMotor.class, "duckSpinner");
+   //     duckSpinner = hardwareMap.get(DcMotor.class, "duckSpinner");
         int power = 1;
         frontRightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         backRightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
